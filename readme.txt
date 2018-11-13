@@ -1,5 +1,10 @@
 Project Showcase Management!
 A project with frontend - HTML and CSS and backend powered by XAMPP, PHP and Mysql!
+A showcase of multiple projects.
+
+
+
+
 Fonts:
  - Lora Font (https://www.google.com/fonts/specimen/Lora)
  - Poppins Font (https://www.google.com/fonts/specimen/Poppins) 
