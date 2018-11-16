@@ -1,5 +1,13 @@
 <?php
 session_start();
+ $con = mysqli_connect("localhost", "root", "jesus123", "spm");
+if (isset($_GET['click']))
+{
+  $_SESSION['pusername'] = $_GET['name'];
+  $_SESSION['pid'] =$_GET['id'];
+  header('location:viewandrate1.php');
+}
+
 ?>
 
 
@@ -90,16 +98,107 @@ session_start();
           <p class="lead"></p>
         </div>
       </div>
+
+
+<?php
+    $query = $_POST['query']; 
+    // gets value sent over search form
+     
+    $min_length = 3;
+    // you can set minimum length of the query if you want
+     
+    if(strlen($query) >= $min_length){ // if query length is more or equal minimum length then
+         
+        $query = htmlspecialchars($query); 
+        // changes characters used in html to their equivalents, for example: < to &gt;
+         
+       // $query = mysql_real_escape_string($query);
+        // makes sure nobody uses SQL injection
+         
+        $raw_results = mysqli_query($con,"SELECT * FROM info
+            WHERE (`pname` LIKE '%".$query."%') OR (`pname` LIKE '%".$query."%')") or die(mysql_error());
+             
+        // * means that it selects all fields, you can also write: `id`, `title`, `text`
+        // articles is the name of our table
+         
+        // '%$query%' is what we're looking for, % means anything, for example if $query is Hello
+        // it will match "hello", "Hello man", "gogohello", if you want exact match use `title`='$query'
+        // or if you want to match just full word so "gogohello" is out use '% $query %' ...OR ... '$query %' ... OR ... '% $query'
+
+       
+
+
+
+
+
+
+        echo "<center>";
+
+         
+        if(mysqli_num_rows($raw_results) > 0){ // if one or more rows are returned do following
+            while($results = mysqli_fetch_array($raw_results)){
+            // $results = mysql_fetch_array($raw_results) puts data from database into array, while it's valid it does the loop
+               
+                echo "<h3><a style='color:  #FF0076;'href='searchpage.php?click=true&pname=".urlencode($results['pname'])."&id=".urlencode($results['id'])."&name=".urlencode($results['iname'])."'>".$results['pname']."</a></h3>";
+
+                echo "<br>";
+                echo "<br>";
+
+
+                // posts results gotten from database(title and text) you can also show id ($results['id'])
+            }
+
+            echo "</center>";
+             
+        }
+
+
+
+        else{ // if there is no matching rows do following
+            echo "No results";
+        }
+         
+    }
+    else{ // if query length is less than minimum
+        echo "Minimum length is ".$min_length;
+    }
+?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
       <div>
-      <form method="post" action="searchpage.php">
-        <center>
-          <input  type="text" name="query" style="text-align:center;"> 
-          <br>
-          <input  type="submit" value="Search"> 
-        </center>
-      </form>
+     
       <div class="row contact-form">
         <div class="row contact-info">
+
+    </div>
+    <div class="row contact-info">
+
+    </div>
+    <div class="row contact-info">
 
     </div>
     <div class="row contact-info">

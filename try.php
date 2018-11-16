@@ -1,14 +1,14 @@
- <?php
-session_start();
+<html>
+<?php
+  function runMyFunction() {
+    echo 'I just ran a php function';
+  }
 
- ?>
+  if (isset($_GET['hello'])) {
+  	
+  }
+?>
 
- <!DOCTYPE html>
- <html>
- <head>
- 	<title>Home</title>
- </head>
- <body>
- <h1 style="text-transform: capitalize;"> Welcome <?php echo $_SESSION['username'];?>! </h1>
- </body>
- </html>
+Hello there!
+<a href='try.php?hello=true;'>Run PHP Function</a>
+</html>

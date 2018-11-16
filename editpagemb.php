@@ -10,6 +10,33 @@
 
 ///////ADD/UPDATE BUTTONS BELOW
 
+
+ if(isset($_POST['msubmit'])){ //check if form was submitted
+  
+  if(isset($_POST['nameau'])){ //check if form was submitted
+      $stext = $_POST['nametext']; //get input text
+      $s="UPDATE `info` SET `pname`='$stext' WHERE id='".$_SESSION['ids']."' ";
+      mysqli_query($con,$s);
+
+
+    }
+    //If synopsis add / update button is pressed
+      if(isset($_POST['synau'])){ //check if form was submitted
+      $stext = $_POST['synopsistext']; //get input text
+      $s="UPDATE `info` SET `synopsis`='$stext' WHERE id='".$_SESSION['ids']."' ";
+      mysqli_query($con,$s);
+
+
+    } 
+
+
+
+
+}  
+
+
+
+
 //// add/update delete screenshot 
       if(isset($_POST['sc_submit2'])){ //check if form was submitted
        $image = addslashes(file_get_contents($_FILES['screenshot_image2']['tmp_name']));
@@ -67,17 +94,19 @@
    if(isset($_POST['febeau'])){ //check if form was submitted
     $front=$_POST['fe'];
     $back=$_POST['be'];
+    echo "$front";
+    echo "$back";
     $s="UPDATE `info` SET `fe`='$front' WHERE id='".$_SESSION['ids']."' ";
-      mysqli_query($con,$s);
-      $s="UPDATE `info` SET `be`='$back' WHERE id='".$_SESSION['ids']."' ";
-      mysqli_query($con,$s);
-    }    
+    mysqli_query($con,$s);
+    $s="UPDATE `info` SET `be`='$back' WHERE id='".$_SESSION['ids']."' ";
+    mysqli_query($con,$s);
+  }    
 ///Send year
    if(isset($_POST['yearau'])){ //check if form was submitted
     $year=$_POST['yr'];
     $s="UPDATE `info` SET `year`='$year' WHERE id='".$_SESSION['ids']."' ";
-      mysqli_query($con,$s);
-    } 
+    mysqli_query($con,$s);
+  } 
    //If name add / update button is pressed
       if(isset($_POST['nameau'])){ //check if form was submitted
       $stext = $_POST['nametext']; //get input text
@@ -110,7 +139,7 @@
 
 
 
-   
+
 //Delete year
 
       if(isset($_POST['namedel'])){ //check if form was submitted
@@ -134,7 +163,7 @@
       }  
 
 
-    
+
 
 
 
@@ -186,7 +215,7 @@
         mysqli_query($con,$s);
       }  
 
-  
+
 
 
       //Delete tables
@@ -319,38 +348,81 @@
 
           			</fieldset>
           		</form> Form End --> 
-              <div class="row services-content">
+              <form method="post" action="">
+                <div class="row services-content">
 
-                <div id="owl-slider" class="owl-carousel services-list">
+                  <div id="owl-slider" class="owl-carousel services-list">
 
 
 
-                  <div class="service"> 
+                    <div class="service"> 
 
-                    <span class="icon"><i class="icon-window"></i></span>            
+                      <span class="icon"><i class="icon-window"></i></span>            
 
-                    <div class="service-content"> 
+                      <div class="service-content"> 
 
-                     <h3>Name of the Project</h3>
+                       <h3>Name of the Project</h3>
 
-                     <div> 
+                       <div> 
 
-                      <label for="sampleRecipientInput">Enter Name:</label>
-                      <form method="post" action="">
-                        <div class="ss-custom-select">
-                          <input type="text" name="nametext" class="full-width" placeholder="Input text here" id="exampleMessage">
+                        <label for="sampleRecipientInput">Enter Name:</label>
+                        <form method="post" action="">
+                          <div class="ss-custom-select">
+                            <input type="text" name="nametext" class="full-width" placeholder="Input text here" id="exampleMessage">
+                          </div>
+
                         </div>
 
-                      </div>
+                        
+                        <br>
+                        <input name="namedel"class="button-primary" type="submit" value="DELETE">
+                      </form>
 
-                      <input name="nameau" class="button-primary" type="submit" value="ADD/UPDATE"> 
-                      <br>
-                      <input name="namedel"class="button-primary" type="submit" value="DELETE">
-                    </form>
+                    </div>
 
-                  </div>
+                  </div>  
 
-                </div>  
+
+
+                     <div class="service"> 
+
+                <span class="icon"><i class="icon-earth"></i></span>                          
+
+                <div class="service-content"> 
+
+                  <h3>Structure</h3>  
+                  <form method="post" action="">
+                    <div>
+                      <label for="sampleRecipientInput">Front-End</label>
+                      <div class="ss-custom-select">
+                        <select name="fe" class="full-width" id="sampleRecipientInput">
+                          <option value="HTML/CSS">HTML/CSS</option>
+                          <option value="NetBeans">NetBeans/Jframes</option>
+                          <option value="C#.Net/ASP.Net">C#.Net/ASP.Net</option>
+                        </select>
+                      </div>                
+                    </div>
+
+                    <div>
+                     <label for="sampleRecipientInput">Back-End</label>
+                     <div class="ss-custom-select">
+                      <select name="be" class="full-width" id="sampleRecipientInput">
+                        <option value="XAMPP/MySQL">XAMPP/MySQL</option>
+                        <option value="MySQL WorkBench">MySQL WorkBench</option>
+                        <option value="Others">Others</option>
+                      </select>  
+                    </div> 
+                    <br>
+                    <input name="febedel"class="button-primary" type="submit" value="DELETE">
+                  </form>
+
+
+                </div>
+
+              </div>                            
+
+            </div> <!-- /service -->
+
 
                   <div class="service"> 
 
@@ -370,7 +442,6 @@
 
                       </div>
 
-                      <input name="synau" class="button-primary" type="submit" value="ADD/UPDATE"> 
                       <br>
                       <input name="syndel"class="button-primary" type="submit" value="DELETE">
                     </form>
@@ -394,55 +465,15 @@
 
               <!-- /service -->
 
-              <div class="service"> 
+             
+            <div class="service"> 
 
-                <span class="icon"><i class="icon-earth"></i></span>                          
+              <span class="icon"><i class="icon-earth"></i></span>                          
 
-                <div class="service-content"> 
+              <div class="service-content"> 
 
-                  <h3>Structure</h3>  
-                  <form method="post" action="">
-                  <div>
-                    <label for="sampleRecipientInput">Front-End</label>
-                    <div class="ss-custom-select">
-                      <select name="fe" class="full-width" id="sampleRecipientInput">
-                        <option value="HTML/CSS">HTML/CSS</option>
-                        <option value="NetBeans">NetBeans/Jframes</option>
-                        <option value="C#.Net/ASP.Net">C#.Net/ASP.Net</option>
-                        <option value="Visual Basic">Visual Basic</option>
-                      </select>
-                    </div>                
-                  </div>
-
-                  <div>
-                   <label for="sampleRecipientInput">Back-End</label>
-                   <div class="ss-custom-select">
-                    <select name="be" class="full-width" id="sampleRecipientInput">
-                      <option value="XAMPP/MySQL">XAMPP/MySQL</option>
-                      <option value="MySQL WorkBench">MySQL WorkBench</option>
-                      <option value="MS Access">MS Access</option>
-                      <option value="Others">Others</option>
-                    </select>  
-                  </div>
-                        <input name="febeau" class="button-primary" type="submit" value="ADD/UPDATE"> 
-                      <br>
-                      <input name="febedel"class="button-primary" type="submit" value="DELETE">
-                    </form>
-                 
-
-                </div>
-
-              </div>                            
-
-            </div> <!-- /service -->
-             <div class="service"> 
-
-                <span class="icon"><i class="icon-earth"></i></span>                          
-
-                <div class="service-content"> 
-
-                  <h3>Year</h3>  
-                  <form method="post" action="">
+                <h3>Year</h3>  
+                <form method="post" action="">
                   <div>
                     <label for="sampleRecipientInput">Project submitted on:</label>
                     <div class="ss-custom-select">
@@ -453,109 +484,124 @@
                       </select>
                     </div>                
                   </div>
-                     
 
-                     <input name="yearau" class="button-primary" type="submit" value="ADD/UPDATE" > 
+
                   <input name="yeardel" class="button-primary" type="submit" value="DELETE">
-              
+
                   <div></form>
-                   
-                  
-
-                </div>
-
-              </div>                            
-
-            </div> <!-- /service -->
-
-            <div class="service">
-
-              <span class="icon"><i class="icon-paint-brush"></i></span>                
-
-              <div class="service-content">
-
-                <h3>Tables</h3>
-
-                <div class="row add-bottom">
-
-                  <div class="col-twelve">
-
-                    <div class="table-responsive">
-                      <form method="post" action=""> 
-                        <table>
-                          <thead>
-                            <tr>
-                              <th>No. of Tables</th>
-                              <th>No. of Attributes</th>
-                              <th>Triggers and Stored Procedures</th>          
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr>
-                              <td><input type="number" min="1" name="notables"></td>
-                              <td><input type="number" min="1" name="noattributes"></td>
-                              <td><input type="number" min="1" name="tsp"></td>             
-                            </tr>
-                          </tbody>
-                        </table>
 
 
-                        <input class="button-primary" name="autables" type="submit" value="ADD/UPDATE" > 
-                        <input class="button-primary" name="deltables" type="submit" value="DELETE">
-                      </form>
-
-                    </div>        
 
                   </div>
 
-                </div>
+                </div>                            
 
-              </div>                               
+              </div> <!-- /service -->
 
-            </div> <!-- /service -->
+              <div class="service">
 
-            <div class="service">
+                <span class="icon"><i class="icon-paint-brush"></i></span>                
 
-              <span class="icon"><i class="icon-image"></i></span>                
+                <div class="service-content">
+
+                  <h3>Tables</h3>
+
+                  <div class="row add-bottom">
+
+                    <div class="col-twelve">
+
+                      <div class="table-responsive">
+                        <form method="post" action=""> 
+                          <table>
+                            <thead>
+                              <tr>
+                                <th>No. of Tables</th>
+                                <th>No. of Attributes</th>
+                                <th>Triggers and Stored Procedures</th>          
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td><input type="number" min="1" name="notables"></td>
+                                <td><input type="number" min="1" name="noattributes"></td>
+                                <td><input type="number" min="1" name="tsp"></td>             
+                              </tr>
+                            </tbody>
+                          </table>
+
+
+                          <input class="button-primary" name="deltables" type="submit" value="DELETE">
+                        </form>
+
+                      </div>        
+
+                    </div>
+
+                  </div>
+
+                </div>                               
+
+              </div> <!-- /service -->
+
+              <div class="service">
+
+                <span class="icon"><i class="icon-image"></i></span>                
+
+                <div class="service-content">
+
+                  <h3>ER DIAGRAM</h3>
+
+                  <form method="POST" action="" enctype="multipart/form-data">
+
+                   <br><input name="er_image" type="file" style="width:200px"></br>
+
+                  
+                   <br><input name="erdelete" class="button-primary" type="submit" value="DELETE"></br>
+
+                 </form>
+
+               </div>                
+
+             </div> <!-- /service -->
+
+             <div class="service">
+
+              <span class="icon"><i class="icon-image"></i></span>              
 
               <div class="service-content">
 
-                <h3>ER DIAGRAM</h3>
+                <h3>DataBase Snapshot</h3>
 
-                <form method="POST" action="" enctype="multipart/form-data">
+                <form method="post" enctype="multipart/form-data"> 
+                 <br><input name="db_image" type="file" style="width:200px"></br>
 
-                 <br><input name="er_image" type="file" style="width:200px"></br>
-
-                 <br><input name="er_submit" class="button-primary" type="submit" value="ADD/UPDATE" ></br>
-                 <br><input name="erdelete" class="button-primary" type="submit" value="DELETE"></br>
+                 <br><input name="db_delete" class="button-primary" type="submit" value="DELETE"></br>
 
                </form>
 
-             </div>                
+
+
+             </div>                 
 
            </div> <!-- /service -->
 
            <div class="service">
 
-            <span class="icon"><i class="icon-image"></i></span>              
+            <span class="icon"><i class="icon-image"></i></span>                
 
             <div class="service-content">
 
-              <h3>DataBase Snapshot</h3>
+             <h3>Screenshots</h3>
+             <form method="post" enctype="multipart/form-data"> 
+               <br><input name="screenshot_image" type="file" style="width:200px"></br>
 
-              <form method="post" enctype="multipart/form-data"> 
-               <br><input name="db_image" type="file" style="width:200px"></br>
-
-               <br><input name="db_submit" class="button-primary" type="submit" value="ADD/UPDATE" ></br>
-               <br><input name="db_delete" class="button-primary" type="submit" value="DELETE"></br>
-
+               <br><input name="sc_delete" class="button-primary" type="submit" value="DELETE"></br>
              </form>
-
-
-
            </div>                 
 
          </div> <!-- /service -->
+
+
 
          <div class="service">
 
@@ -565,28 +611,8 @@
 
            <h3>Screenshots</h3>
            <form method="post" enctype="multipart/form-data"> 
-             <br><input name="screenshot_image" type="file" style="width:200px"></br>
-
-             <br><input name="sc_submit" class="button-primary" type="submit" value="ADD/UPDATE" ></br>
-             <br><input name="sc_delete" class="button-primary" type="submit" value="DELETE"></br>
-           </form>
-         </div>                 
-
-       </div> <!-- /service -->
-
-
-
-       <div class="service">
-
-          <span class="icon"><i class="icon-image"></i></span>                
-
-          <div class="service-content">
-
-           <h3>Screenshots</h3>
-           <form method="post" enctype="multipart/form-data"> 
              <br><input name="screenshot_image2" type="file" style="width:200px"></br>
 
-             <br><input name="sc_submit2" class="button-primary" type="submit" value="ADD/UPDATE" ></br>
              <br><input name="sc_delete2" class="button-primary" type="submit" value="DELETE"></br>
            </form>
          </div>                 
@@ -610,9 +636,6 @@
              TeamMate2: <input type="text" name="ttwo"><br>
            </div>
          </div>
-
-
-         <input name="teamadd" class="button-primary" type="submit" value="UPDATE/ADD">
 
          <input name="teamd" class="button-primary" type="submit" value="DELETE">
 
@@ -640,7 +663,6 @@
       </div>
 
 
-      <input name="auskill" class="button-primary" type="submit" value="ADD/UPDATE"> 
       <input name="delskill" class="button-primary" type="submit" value="DELETE">
     </form>
   </div>
@@ -648,6 +670,9 @@
 </div>
 
 </div> <!-- /services-list -->
+<br>
+<center><input name="msubmit" class="button-primary" type="submit" value="SUBMIT"></center>
+</form>
 
 </div> <!-- /services-content -->
 

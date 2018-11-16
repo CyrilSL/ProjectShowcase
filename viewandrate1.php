@@ -6,11 +6,11 @@
 
     $con = mysqli_connect("localhost", "root", "jesus123", "spm");
 
-    $info = mysqli_query($con,"SELECT * FROM info WHERE id='".$_SESSION['ids']."'; ");
+    $info = mysqli_query($con,"SELECT * FROM info WHERE id='".$_SESSION['pid']."'; ");
     
 
 
-$sql = "SELECT * FROM images WHERE id='".$_SESSION['ids']."';";
+$sql = "SELECT * FROM images WHERE id='".$_SESSION['pid']."';";
 $sth = $con->query($sql);
 $result=mysqli_fetch_array($sth);
 ?>
@@ -89,7 +89,7 @@ while($row = mysqli_fetch_array($info))
    		<div class="col-twelve">
 
    			<h5>Display Section</h5>
-   			<h1 style="text-transform: capitalize;">Project display of <?php echo $_SESSION['username']; ?>!</h1>
+   			<h1 style="text-transform: capitalize;">Project display of <?php echo $_SESSION['pusername']; ?>!</h1>
 
    			
 

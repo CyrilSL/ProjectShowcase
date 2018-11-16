@@ -62,47 +62,10 @@
 
 		<div class="row section-intro">
    		<div class="col-twelve">
-   			<?php
-
-  session_start();
-  //header('location:login.html');
-  $con = mysqli_connect("localhost", "root", "jesus123", "spm");
-  //mysql_select_db($con,"spm");
-  $name=$_POST['user'];
-  $pwd=$_POST['password'];
-
-  $s= "select * from registration where name= '$name'";
-  
-  $result =mysqli_query($con,$s);
-
-  $num=mysqli_num_rows($result);
-
-  if($num==1)
-  {
-  	echo "<h1>Username Already Taken!</h1>";
-  }else{
-  	$reg="insert into registration(name , password) values ('$name', '$pwd')";
-    $id = "SELECT `id` FROM `registration` WHERE name = '$name'";
-  	mysqli_query($con,$reg);	
-    $t = mysqli_query($con,$id);
-  
-  //Stores ID value of username to $t in string
-  
-  while ($row = $t->fetch_assoc()) {
-   $ids = $row['id'];
-   }
-   $ins = "INSERT INTO `info`(`id`) VALUES ($ids);";
-   mysqli_query($con,$ins);
-   $ins = "INSERT INTO `images`(`id`) VALUES ($ids);";
-   mysqli_query($con,$ins);
-   $insname = "UPDATE info SET iname='$name' where id='$ids';";
-      mysqli_query($con,$insname);
- 
-  	echo "<h1>Account Sucessfully Created!</h1>";
-    echo "<h1>'$name'</h1>";
-  }
-?>
-   		</div> 
+   	  
+      <h1> ERROR!</h1>
+      <h1>Must login to continue.</h1>
+    	</div> 
    	</div> <!-- /section-intro -->
 
    	

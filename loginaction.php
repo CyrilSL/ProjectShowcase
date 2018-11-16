@@ -1,5 +1,4 @@
 <?php
-
   session_start();
   //header('location:login.html');
   $con = mysqli_connect("localhost", "root", "jesus123", "spm");
@@ -29,13 +28,10 @@
  {
   $_SESSION['username'] =$name;
 
+
   $_SESSION['ids'] =$ids;
  header('location:gateway.php');
  }else{
    header('location:registration.html');
  }
-
-
-
-
 ?>

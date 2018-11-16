@@ -1,6 +1,14 @@
 <?php
    session_start();
 
+
+   if(!isset($_SESSION['username'])){
+         header('Location: loginerror.html');
+    }
+//    if( isset($_GET['index.html'])){
+//  session_destroy();
+//  header('Location: loginerror.html');
+//     }
 ?>
 
 <!DOCTYPE html>
@@ -51,7 +59,7 @@
 
             <nav id="main-nav-wrap">
                <ul class="main-navigation">
-                  <li class="current"><a href="index.html" title="">LOGOUT</a> 
+                  <li class="current"><a href="sessionlogout.php">LOGOUT</a> </li>
                </ul>
             </nav>         
          </div> <!-- /top-bar --> 
@@ -66,7 +74,7 @@
 
             <h5>Gateway Section</h5>
             <h1 style="text-transform: capitalize;">Welcome <?php echo $_SESSION['username']; ?>!</h1>
-            <h1> <?php echo $_SESSION['ids']; ?> </h1>
+            <h5> ID <?php echo $_SESSION['ids']; ?> </h5>
             <h1>What do you want to do ?</h1>
 
             <p class="lead">Edit project info. View projects and rate them. Say something at the discussion forum</p>
@@ -148,14 +156,14 @@
                   </div>         
 
                   <div class="description-box">
-                     <h4>View & Rate other projects</h4>           
-                     <p>This section is provided to the user to view and rate other projects. Projects would be sorted on the basis of the highest ratings both from students and teachers.</p>
+                     <h4>View your project display</h4>           
+                     <p>This section is provided to the user to view your project</p>
 
                      <div class="categories"></div>                        
                   </div>
 
                   <div class="link-box">
-                     <a href="viewandrate.php">Go to View and Rate mode</a>
+                     <a href="viewandrate.php">Go to View mode</a>
                      <a href="#" class="popup-modal-dismiss">Close</a>
                   </div>            
 
@@ -199,7 +207,50 @@
                      <a href="#" class="popup-modal-dismiss">Close</a>
                   </div>            
 
-               </div> <!-- /modal-01 -->
+               </div> 
+
+
+               <!-- modal popups 2 rating - begin
+               ============================================================= -->
+
+               <div id="folio-wrapper" class="block-1-2 block-mob-full stack">
+
+               <div class="bgrid folio-item">
+                  <div class="item-wrap">
+                     <img src="images/portfolio/edit.jpg" alt="Liberty">
+                     <a href="#modal-04" class="overlay">                                   
+                        <div class="folio-item-table">
+                           <div class="folio-item-cell">
+                               <h3 class="folio-title">OPERATIONS</h3>                        
+                               <span class="folio-types">
+                                   
+                               </span>
+                           </div>                           
+                        </div>                    
+                     </a>
+                  </div>                  
+               </div>
+
+
+               <div id="modal-04" class="popup-modal slider mfp-hide">  
+
+                  <div class="media">
+                     <img src="images/portfolio/modals/editfull.jpg" alt="" />
+                  </div>         
+
+                  <div class="description-box">
+                     <h4>Operations Section</h4>           
+                     <p>This section is provided to the user to perform a few operations on the list</p>
+
+                     <div class="categories"></div>                        
+                  </div>
+
+                  <div class="link-box">
+                     <a href="operations.php">Go to Operation mode</a>
+                     <a href="#" class="popup-modal-dismiss">Close</a>
+                  </div>            
+
+               </div><!-- /modal-01 -->
 
 
        <!-- Java Script
